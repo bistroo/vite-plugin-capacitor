@@ -1,0 +1,32 @@
+{
+  "name": "@bistroo/vite-plugin-capacitor",
+  "version": "1.0.0",
+  "description": "Vite plugin for capacitor",
+  "type": "module",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bistroo/vite-plugin-capacitor.git"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["vite", "capacitor"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@capacitor/cli": "^4.6.3",
+    "esbuild": "^0.17.10",
+    "rollup": "^3.17.2",
+    "rollup-plugin-dts": "^5.2.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}
