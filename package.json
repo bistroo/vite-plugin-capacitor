@@ -5,6 +5,10 @@
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bistroo/vite-plugin-capacitor.git"
