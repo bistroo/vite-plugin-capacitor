@@ -1,4 +1,4 @@
-# vite-plugin-capacitor
+# @bistroo/vite-plugin-capacitor
 
 ## Install
 

@@ -9,6 +9,14 @@
     "type": "git",
     "url": "https://github.com/bistroo/vite-plugin-capacitor.git"
   },
+  "bugs": {
+    "url": "https://github.com/bistroo/vite-plugin-capacitor/issues"
+  },
+  "keywords": [
+    "vite",
+    "plugin",
+    "capacitor"
+  ],
   "files": [
     "dist/index.js",
     "dist/index.d.ts"
@@ -17,7 +25,6 @@
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["vite", "capacitor"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
