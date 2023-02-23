@@ -19,7 +19,7 @@
   },
   "keywords": ["vite", "capacitor"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@capacitor/cli": "^4.6.3",
     "esbuild": "^0.17.10",
