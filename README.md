@@ -1,5 +1,7 @@
 # @bistroo/vite-plugin-capacitor
 
+> Note: Don't use `"type": "module"` or vite.config.mts/mjs
+
 ## Install
 
 ```bash
@@ -13,9 +15,7 @@ import { capacitor } from '@bistroo/vite-plugin-capacitor'
 
 export default defineConfig({
   plugins: [
-    capacitor({
-      platform: 'android',
-    }),
+    capacitor(),
   ],
 })
 ```
@@ -27,9 +27,8 @@ capacitor(config: CapacitorPluginConfig)
 
 ```typescript
 type CapacitorPluginConfig = {
-  platform: 'android' | 'ios' | 'web'
   buildOptions?: BuildCommandOptions
-  runOptions?: RunCommandOptions,
+  runOptions?: RunCommandOptions
 }
 ```
 

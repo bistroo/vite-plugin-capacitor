@@ -4,18 +4,7 @@ import esbuild from 'rollup-plugin-esbuild'
 export default [
   {
     input: 'src/index.ts',
-    external: ['@capacitor/cli/dist/tasks/run', '@capacitor/cli/dist/tasks/build', '@capacitor/cli/dist/config'],
-    output: {
-      format: 'es',
-      file: `dist/index.mjs`,
-    },
-    plugins: [
-      esbuild(),
-    ],
-  },
-  {
-    input: 'src/index.ts',
-    external: ['@capacitor/cli/dist/tasks/run', '@capacitor/cli/dist/tasks/build', '@capacitor/cli/dist/config'],
+    external: ['@capacitor/cli/dist/tasks/run', '@capacitor/cli/dist/tasks/build', '@capacitor/cli/dist/config', 'inquirer'],
     output: {
       format: 'cjs',
       file: `dist/index.js`,

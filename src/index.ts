@@ -8,28 +8,44 @@ import { runCommand } from '@capacitor/cli/dist/tasks/run'
 import { buildCommand } from '@capacitor/cli/dist/tasks/build'
 // @ts-ignore
 import { loadConfig } from '@capacitor/cli/dist/config'
+import inquirer from 'inquirer'
 
 type CapacitorPluginConfig = {
-  platform: 'android' | 'ios' | 'web'
   buildOptions?: {}, // BuildCommandOptions
   runOptions?: {} // RunCommandOptions,
 }
 
-export function viteCapacitorPlugin(config: CapacitorPluginConfig): Plugin {
+export function viteCapacitorPlugin(capacitorConfig: CapacitorPluginConfig): Plugin {
   let command: ResolvedConfig['command']
+  let platform: string
 
   return {
     name: 'vite-capacitor-plugin',
-    configResolved(config: ResolvedConfig) {
+    async configResolved(config: ResolvedConfig) {
       command = config.command
+
+      const answers = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'platform',
+          message: 'Choose a platform:',
+          choices: [
+            { value: 'android', name: 'Android'},
+            { value: 'ios', name: 'iOS'},
+            { value: 'web', name: 'Web'},
+          ],
+        },
+      ])
+
+      platform = answers.platform
     },
     async configureServer() {
       const config = await loadConfig()
 
       if (command === 'serve') {
-        runCommand(config, config.platform, config.runOptions ?? { sync: true })
+        runCommand(config, platform, capacitorConfig.runOptions ?? { sync: true })
       } else {
-        buildCommand(config, config.platform, config.buildOptions ?? {})
+        buildCommand(config, platform, capacitorConfig.buildOptions ?? {})
       }
     }
   }
