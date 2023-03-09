@@ -11,18 +11,24 @@ import { loadConfig } from '@capacitor/cli/dist/config'
 import inquirer from 'inquirer'
 
 type CapacitorPluginConfig = {
-  buildOptions?: {}, // BuildCommandOptions
-  runOptions?: {} // RunCommandOptions,
+  // https://github.com/ionic-team/capacitor/blob/main/cli/src/tasks/build.ts#L7-L14
+  runOptions?: {}
+  // https://github.com/ionic-team/capacitor/blob/main/cli/src/tasks/run.ts#L21-L27
+  buildOptions?: {}
 }
 
-export function viteCapacitorPlugin(capacitorConfig: CapacitorPluginConfig): Plugin {
+export function viteCapacitorPlugin(capacitorConfig?: CapacitorPluginConfig): Plugin {
   let command: ResolvedConfig['command']
+  // https://github.com/ionic-team/capacitor/blob/main/cli/src/definitions.ts#L129
+  let config: any
   let platform: string
 
   return {
     name: 'vite-capacitor-plugin',
-    async configResolved(config: ResolvedConfig) {
-      command = config.command
+    async configResolved(viteConfig: ResolvedConfig) {
+      command = viteConfig.command
+
+      config = await loadConfig()
 
       const answers = await inquirer.prompt([
         {
@@ -40,12 +46,13 @@ export function viteCapacitorPlugin(capacitorConfig: CapacitorPluginConfig): Plu
       platform = answers.platform
     },
     async configureServer() {
-      const config = await loadConfig()
-
       if (command === 'serve') {
-        runCommand(config, platform, capacitorConfig.runOptions ?? { sync: true })
-      } else {
-        buildCommand(config, platform, capacitorConfig.buildOptions ?? {})
+        await runCommand(config, platform, capacitorConfig?.runOptions ?? { sync: true })
+      }
+    },
+    async closeBundle() {
+      if (command === 'build') {
+        await buildCommand(config, platform, capacitorConfig?.buildOptions ?? {})
       }
     }
   }

@@ -31,7 +31,3 @@ type CapacitorPluginConfig = {
   runOptions?: RunCommandOptions
 }
 ```
-
-> see https://github.com/ionic-team/capacitor/blob/main/cli/src/tasks/run.ts#L21-L27 for `RunCommandOptions` and https://github.com/ionic-team/capacitor/blob/main/cli/src/tasks/build.ts#L7-L14 for `BuildCommandOptions`
->
-> Capacitor doesn't export the types...
