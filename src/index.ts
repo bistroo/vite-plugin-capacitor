@@ -7,6 +7,8 @@ import { runCommand } from '@capacitor/cli/dist/tasks/run'
 // @ts-ignore
 import { buildCommand } from '@capacitor/cli/dist/tasks/build'
 // @ts-ignore
+import { syncCommand } from '@capacitor/cli/dist/tasks/sync'
+// @ts-ignore
 import { loadConfig } from '@capacitor/cli/dist/config'
 import inquirer from 'inquirer'
 
@@ -52,6 +54,10 @@ export function viteCapacitorPlugin(capacitorConfig?: CapacitorPluginConfig): Pl
     },
     async closeBundle() {
       if (command === 'build') {
+        // deployment option is set default to false:
+        // see: https://capacitorjs.com/docs/v2/cli/sync#sync
+        await syncCommand(config, platform, false)
+
         await buildCommand(config, platform, capacitorConfig?.buildOptions ?? {})
       }
     }
