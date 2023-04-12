@@ -10,7 +10,7 @@ import { buildCommand } from '@capacitor/cli/dist/tasks/build'
 import { syncCommand } from '@capacitor/cli/dist/tasks/sync'
 // @ts-ignore
 import { loadConfig } from '@capacitor/cli/dist/config'
-import inquirer from 'inquirer'
+import prompts from 'prompts'
 
 type CapacitorPluginConfig = {
   // https://github.com/ionic-team/capacitor/blob/main/cli/src/tasks/build.ts#L7-L14
@@ -32,20 +32,21 @@ export function viteCapacitorPlugin(capacitorConfig?: CapacitorPluginConfig): Pl
 
       config = await loadConfig()
 
-      const answers = await inquirer.prompt([
+      const result = await prompts([
         {
-          type: 'list',
+          type: 'select',
           name: 'platform',
-          message: 'Choose a platform:',
+          message: 'Choose a platform',
           choices: [
-            { value: 'android', name: 'Android'},
-            { value: 'ios', name: 'iOS'},
-            { value: 'web', name: 'Web'},
+            { title: 'Android', value: 'android' },
+            { title: 'iOS', value: 'ios' },
+            { title: 'Web', value: 'web' }
           ],
-        },
+          initial: 1
+        }
       ])
 
-      platform = answers.platform
+      platform = result.platform
     },
     async configureServer() {
       if (command === 'serve') {

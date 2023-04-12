@@ -1,7 +1,5 @@
 # @bistroo/vite-plugin-capacitor
 
-> Note: Don't use `"type": "module"` or vite.config.mts/mjs
-
 ## Install
 
 ```bash
