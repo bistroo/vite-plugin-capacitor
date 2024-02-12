@@ -18,6 +18,14 @@ export default defineConfig({
 })
 ```
 
+## Usage
+
+```bash
+PLATFORM=android|ios|web vite <build|preview>
+```
+
+or the prompt.
+
 ## API
 ```typescript
 capacitor(config: CapacitorPluginConfig)

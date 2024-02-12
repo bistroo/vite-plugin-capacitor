@@ -32,21 +32,25 @@ export function viteCapacitorPlugin(capacitorConfig?: CapacitorPluginConfig): Pl
 
       config = await loadConfig()
 
-      const result = await prompts([
-        {
-          type: 'select',
-          name: 'platform',
-          message: 'Choose a platform',
-          choices: [
-            { title: 'Android', value: 'android' },
-            { title: 'iOS', value: 'ios' },
-            { title: 'Web', value: 'web' }
-          ],
-          initial: 1
-        }
-      ])
-
-      platform = result.platform
+      if (process.env.PLATFORM !== undefined) {
+        platform = process.env.PLATFORM
+      } else {
+        const result = await prompts([
+          {
+            type: 'select',
+            name: 'platform',
+            message: 'Choose a platform',
+            choices: [
+              { title: 'Android', value: 'android' },
+              { title: 'iOS', value: 'ios' },
+              { title: 'Web', value: 'web' }
+            ],
+            initial: 1
+          }
+        ])
+  
+        platform = result.platform
+      }
     },
     async configureServer() {
       if (command === 'serve') {
