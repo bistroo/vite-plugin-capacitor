@@ -1,6 +1,6 @@
 {
   "name": "@bistroo/vite-plugin-capacitor",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "type": "module",
   "packageManager": "pnpm@9.9.0",
   "description": "Vite plugin for capacitor",
